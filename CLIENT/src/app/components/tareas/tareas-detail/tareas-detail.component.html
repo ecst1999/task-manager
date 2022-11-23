@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-2" *ngIf="tarea">
+    <div class="card mb-3">
+        <div class="card-header">
+          <div class="d-flex">
+            <div class="me-auto p-2">
+              <a class="btn btn-primary p-2" routerLink="/tareas">                
+                  <i class="fas fa-light fa-arrow-left"></i>
+                  Regresar
+              </a>
+            </div>
+            <div class="p-2">
+              <a class="btn btn-secondary" routerLink="/subtarea/form/{{tarea.uid}}">                
+                  <i class="fas fa-light fa-plus"></i>
+                  Agregar Subtarea
+              </a>
+            </div>
+            <div class="p-2">
+              <button class="btn btn-danger" (click)="eliminarTarea(tarea.uid);">                
+                  <i class="fas fa-light fa-trash"></i>
+                  Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="card mb-3">
+        <div class="card-header bg-secondary text-white">Detalle de tarea</div>
+        <div class="card-body">
+          <h5 class="card-title">{{tarea.titulo}}</h5>
+          <p class="card-text">{{tarea.descripcion}}</p>
+        </div>
+        <div class="card-footer bg-white">
+            <h5 class="card-title">Subtareas:</h5>
+            <div class="list-group list-group-light">
+                <div *ngFor="let subTarea of subTareas">
+                    <div class="list-group-item list-group-item-action px-3 border-0 ripple">
+                      <div class="d-flex">
+                        <div class="p-2">
+                          {{subTarea.descripcion}} 
+                        </div>
+                        <div class="ms-auto p-2">
+                          <button class="btn btn-danger"  (click)="eliminarSubtarea(subTarea.uid);"><i class="fas fa-trash"></i></button>
+                          <button class="btn btn-info"><i class="fas fa-pencil"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div *ngIf="subTareas.length == 0">
+                    <div class="list-group-item list-group-item-action px-3 border-0 ripple"
+                      >No existen subtareas</div>
+                </div>
+              </div>
+        </div>
+      </div>
+</div>
+<app-footer></app-footer>

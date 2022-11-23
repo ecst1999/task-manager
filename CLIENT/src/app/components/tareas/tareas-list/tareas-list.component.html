@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-3">
+
+    <div class="row">
+        <div *ngFor="let estado of estados" class="col-4">
+            <div class="p-3 mb-2 bg-{{estado.color}} text-white rounded">{{estado.descripcion}}</div>
+        </div>
+    </div>
+
+    <a routerLink="/tarea-form" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Agregar Tarea
+    </a>
+
+    <div class="row mt-3">
+        <div class="card col-md-4" *ngFor="let tarea of tareas">        
+            <div class="card-body">
+                <h5 class="card-title">{{tarea.titulo}}</h5>
+                <p class="card-text">
+                    {{tarea.descripcion}}
+                </p>
+            </div>
+            <div class="card-footer text-muted">
+                <p class="card-text" *ngIf="tarea.ubicacion">
+                    <i class="fas fa-regular fa-location-dot"></i> <span> {{tarea.ubicacion}}</span>
+                </p>            
+            <a routerLink="/tarea/{{tarea.uid}}" class="btn btn-primary btn-block">Ver mas...</a>            
+            <a routerLink="/tarea-form/{{tarea.uid}}" class="btn btn-secondary btn-block">Editar</a>            
+            </div>
+    
+        </div>
+    </div>
+
+</div>
+<app-footer></app-footer>

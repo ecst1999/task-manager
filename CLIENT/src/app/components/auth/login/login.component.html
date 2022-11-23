@@ -1,0 +1,69 @@
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          class="img-fluid"
+          alt="Phone image"
+        />
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <form autocomplete="off" [formGroup]="formulario" (ngSubmit)="login()">
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input
+              type="email"
+              id="email"
+              class="form-control form-control-lg"
+              formControlName="correo"             
+            />
+            <label class="form-label" for="email">Email address</label>
+            <small *ngIf="(formulario.controls['correo'].touched || submitted) && formulario.controls['correo'].errors?.['required']" class="text-danger">
+              Ingrese un Correo
+            </small>
+            <small *ngIf="(formulario.controls['correo'].touched || submitted) && formulario.controls['correo'].errors?.['email']" class="text-danger">
+              Ingrese un correo valido
+            </small>
+          </div>          
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <input
+              type="password"
+              id="clave"
+              formControlName="clave"
+              class="form-control form-control-lg"
+              autocomplete="off"
+            />
+            <label class="form-label" for="clave">Password</label>
+            <small *ngIf="(formulario.controls['clave'].touched || submitted) && formulario.controls['clave'].errors?.['required']" class="text-danger">
+              Ingrese una contraseña
+            </small>
+          </div>          
+          <div class="d-flex justify-content-around align-items-center mb-4">
+            <!-- Checkbox -->
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="recordar"
+                checked
+                formControlName="recordar"
+              />
+              <label class="form-check-label" for="recordar">
+                Remember me
+              </label>
+            </div>
+            <a href="#!">Forgot password?</a>
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            Sign in
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

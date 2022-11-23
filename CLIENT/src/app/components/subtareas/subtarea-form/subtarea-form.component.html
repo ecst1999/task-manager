@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+    <div class="container mt-3">
+        <div class="p-5 mb-4 bg-light rounded-3 mt-2">
+            <form autocomplete="off" [formGroup]="formulario" (ngSubmit)="crearSubtarea()">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+        
+                <div class="row mb-4">                    
+                    <div class="col">
+                        <div class="form-outline">
+                        <input type="text" id="nombre" class="form-control" formControlName="nombre"/>
+                        <label class="form-label" for="nombre">Nombre</label>
+                        </div>
+                    </div>
+                </div>    
+            
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <textarea name="descripcion" formControlName="descripcion" id="descripcion" cols="30" rows="10" class="form-control"></textarea>          
+                    <label class="form-label" for="descripcion">Descripción</label>
+                </div>
+            
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">                
+                        <input type="date" class="form-control" name="fechaLimite" id="fechaLimite" formControlName="fechaLimite">
+                        <label class="form-label" for="fechaLimite">Fecha límite</label>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row mb-4">            
+                    <div class="col">
+                        <div class="form-outline">
+                        <input type="text" id="prioridad" class="form-control" formControlName="prioridad"/>
+                        <label class="form-label" for="prioridad">Prioridad</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                    <div class="form-outline">              
+                    <select name="estadoSubtarea" id="estadoSubtarea" class="form-control" formControlName="estadoSubtarea">
+                        <option value="">Seleccione estado de la subtarea</option>
+                        <option value="{{estado.uid}}" *ngFor="let estado of estados" >{{estado.descripcion}}</option>
+                    </select>
+                    <label class="form-label" for="estadoSubtarea">Estado de la subtarea</label>
+                    </div>
+                </div>
+                </div>
+                    
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">
+                Guardar tarea
+                </button>
+            </form>
+        </div>
+    </div>
+<app-footer></app-footer>
+

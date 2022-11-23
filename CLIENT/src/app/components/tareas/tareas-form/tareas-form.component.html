@@ -1,0 +1,88 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-3">
+  
+    <div class="p-5 mb-4 bg-light rounded-3 mt-2">
+        <form autocomplete="off" [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">                
+                <select name="categoria" id="categoria" class="form-control" formControlName="categoria">
+                    <option value="">Seleccione Categoria</option>
+                    <option value="{{categoria.uid}}" *ngFor="let categoria of categorias" >{{categoria.nombre}}</option>
+                </select>
+                <label class="form-label" for="categoria">Categoria</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                <input type="text" id="titulo" class="form-control" formControlName="titulo"/>
+                <label class="form-label" for="titulo">Titulo</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <input type="file" id="archivo" class="form-control" formControlName="archivo"/>
+              <label class="form-label" for="archivo">Archivo adjunto</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="text" id="ubicacion" class="form-control" formControlName="ubicacion"/>
+              <label class="form-label" for="ubicacion">Ubicación</label>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Text input -->
+        <div class="form-outline mb-4">
+            <textarea name="descripcion" formControlName="descripcion" id="descripcion" cols="30" rows="10" class="form-control"></textarea>          
+            <label class="form-label" for="descripcion">Descripción</label>
+        </div>
+    
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">                
+                <input type="date" class="form-control" name="fechaLimite" id="fechaLimite" formControlName="fechaLimite">
+                <label class="form-label" for="fechaLimite">Fecha límite</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                <input type="text" id="icono" class="form-control" formControlName="icono"/>
+                <label class="form-label" for="icono">Icono</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">            
+            <div class="col">
+                <div class="form-outline">
+                <input type="text" id="prioridad" class="form-control" formControlName="prioridad"/>
+                <label class="form-label" for="prioridad">Prioridad</label>
+                </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">              
+              <select name="estadoTarea" id="estadoTarea" class="form-control" formControlName="estadoTarea">
+                  <option value="">Seleccione estado de tarea</option>
+                  <option value="{{estado.descripcion}}" *ngFor="let estado of estados" >{{estado.descripcion}}</option>
+              </select>
+              <label class="form-label" for="estadoTarea">Estado de la tarea</label>
+            </div>
+          </div>
+        </div>
+            
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">
+          Guardar tarea
+        </button>
+      </form>
+    </div>
+</div>
+<app-footer></app-footer>
