@@ -10,7 +10,7 @@
             <div class="col">
                 <div class="form-outline">                
                 <select name="categoria" id="categoria" class="form-control" formControlName="categoria">
-                    <option value="">Seleccione Categoria</option>
+                    <option value="" selected>Seleccione Categoria</option>
                     <option value="{{categoria.uid}}" *ngFor="let categoria of categorias" >{{categoria.nombre}}</option>
                 </select>
                 <label class="form-label" for="categoria">Categoria</label>
@@ -70,19 +70,31 @@
             <div class="col">
               <div class="form-outline">              
               <select name="estadoTarea" id="estadoTarea" class="form-control" formControlName="estadoTarea">
-                  <option value="">Seleccione estado de tarea</option>
+                  <option value="" selected>Seleccione estado de tarea</option>
                   <option value="{{estado.descripcion}}" *ngFor="let estado of estados" >{{estado.descripcion}}</option>
               </select>
               <label class="form-label" for="estadoTarea">Estado de la tarea</label>
             </div>
           </div>
         </div>
-            
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-block mb-4">
-          Guardar tarea
-        </button>
+        <div class="d-flex">
+          <!-- Submit button -->
+          <div class="me-auto p-2">
+            <a class="btn btn-secondary" routerLink="/tareas">                
+              <i class="fas fa-light fa-arrow-left"></i>
+              Cancelar
+            </a>
+          </div>
+          
+          <div class="p-2">
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              <i class="fas fa-light fa-save"></i>
+              Guardar tarea
+            </button>
+          </div>
+        </div>
       </form>
+
     </div>
 </div>
 <app-footer></app-footer>

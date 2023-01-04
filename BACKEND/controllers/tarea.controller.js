@@ -93,7 +93,7 @@ const getTarea = async (req, res) => {
         _id: id
     };
 
-    const tarea = await Tarea.findOne(query).populate('usuario', 'nombre').populate('categoria').populate('estado');
+    const tarea = await Tarea.findOne(query).populate('usuario', 'nombre').populate('categoria').populate('estado').populate('estadoTarea', 'descripcion');
 
     !tarea 
     && 
@@ -112,7 +112,7 @@ const getTarea = async (req, res) => {
  */
 const updateTarea = async (req, res) => {
     
-    const { id } = req.params;
+    const { id } = req.params;    
     const usuarioID = req.usuario._id;
     const { categoria, titulo, archivo, ubicacion, descripcion, fechaLimite, icono, prioridad, estadoTarea } = req.body;
     const estado = await Estado.findOne({descripcion: estadoTarea});
@@ -130,7 +130,7 @@ const updateTarea = async (req, res) => {
         msg: `No se encontro el estado: ${estadoTarea}`
     });
     
-    const query = { id, usuario: usuarioID };
+    const query = { _id: id, usuario: usuarioID };
 
     const dataUpdate = {
         categoria,

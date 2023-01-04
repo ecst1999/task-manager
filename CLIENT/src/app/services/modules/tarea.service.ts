@@ -56,6 +56,12 @@ export class TareaService {
     );
   }
 
+  patchTarea(tarea: any, idTarea: String): Observable<Tarea> {
+    return this.http.patch(`${this.pathURL}/${idTarea}`,tarea, this.httpOptions).pipe(
+      map((resp: Tarea) => resp)
+    );
+  }
+
   deleteTarea(idTarea: String): Observable<Tarea> {
     return this.http.delete(`${this.pathURL}/${idTarea}`, this.httpOptions).pipe(
       map((resp: Tarea) => resp)
