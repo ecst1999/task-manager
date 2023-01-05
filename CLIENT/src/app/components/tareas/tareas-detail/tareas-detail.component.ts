@@ -89,7 +89,7 @@ export class TareasDetailComponent implements OnInit {
             showConfirmButton: false
           }).then(result => {
             if(result.dismiss === Swal.DismissReason.timer){
-              this.router.navigate(['/tarea/'+ this.idTarea]);
+              window.location.reload();
             }
           });
         }, (error: HttpErrorResponse) => {

@@ -20,12 +20,18 @@
                     {{tarea.descripcion}}
                 </p>
             </div>
-            <div class="card-footer text-muted">
-                <p class="card-text" *ngIf="tarea.ubicacion">
-                    <i class="fas fa-regular fa-location-dot"></i> <span> {{tarea.ubicacion}}</span>
-                </p>            
-            <a routerLink="/tarea/{{tarea.uid}}" class="btn btn-primary btn-block">Ver mas...</a>            
-            <a routerLink="/tarea-form/{{tarea.uid}}" class="btn btn-secondary btn-block">Editar</a>            
+            <div class="card-footer text-muted">                                                                       
+                
+                <div class="d-flex">
+                    <!-- Submit button -->
+                    <div class="me-auto p-2">
+                        <a routerLink="/tarea/{{tarea.uid}}" class="btn btn-primary btn-block">Ver mas...</a> 
+                    </div>
+                    
+                    <div class="p-2">
+                        <a routerLink="/tarea-form/{{tarea.uid}}" class="btn btn-secondary btn-block">Editar</a>
+                    </div>
+                </div>
             </div>
     
         </div>

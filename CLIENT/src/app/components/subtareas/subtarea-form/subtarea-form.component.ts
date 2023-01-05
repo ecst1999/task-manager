@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,19 +15,41 @@ import Swal from 'sweetalert2';
 })
 export class SubtareaFormComponent implements OnInit {
 
-  public formulario: FormGroup;  
+  public formulario: FormGroup;    
   estados: Estado[];
-  idTarea: String;
+  idTarea: any;
+  idSubtarea: String;
   isSubmited = false;
+  ruta: String;
+  editar = false;
 
   constructor(private tareaService: TareaService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
               private subTareaService: SubTareaService,
-              private router: Router) {                
-              this.idTarea = this.route.snapshot.paramMap.get('idTarea');      
-              this.getEstados();
-              this.cargarFormulario();
+              private router: Router) {        
+
+      this.idTarea = this.route.snapshot.paramMap.get('idTarea');      
+      this.idSubtarea = this.route.snapshot.paramMap.get('idSubtarea');  
+      this.ruta = this.route.snapshot.routeConfig.path;
+      this.getEstados();
+      this.cargarFormulario();
+
+      if(this.ruta.includes('edit-form') && this.idSubtarea != null){
+        this.editar = true;
+        this.subTareaService.getSubtarea(this.idSubtarea).subscribe(resp => {
+          this.formulario.reset({
+            nombre: resp.nombre,
+            descripcion: resp.descripcion,
+            fechaLimite:  formatDate(resp.fechaLimite, 'yyyy-MM-dd', 'en'),
+            prioridad: resp.prioridad,
+            estadoSubtarea: resp.estadoSubtarea  
+          });     
+          this.idTarea = resp.tarea;          
+        });        
+      }
+
+      
   }
 
   ngOnInit(): void {    
@@ -43,35 +66,64 @@ export class SubtareaFormComponent implements OnInit {
     });
   }
 
-  crearSubtarea(){
-
+  submitFormulario(){
     this.isSubmited = true;    
 
     if(this.formulario.invalid) return;
 
     if(this.formulario.valid){      
-      this.subTareaService.postSubtarea(this.formulario.value).subscribe(resp => {
-        Swal.fire({          
-          icon: 'success',
-          text: resp['msg'],
-          timer: 1800,
-          showConfirmButton: false
-        }).then((result) => {
-          if (result.dismiss === Swal.DismissReason.timer){
-            this.router.navigate(['/tarea/'+ this.idTarea]);
-          }
-        }); 
-      }, (error: HttpErrorResponse) => {
-          Swal.fire({          
-            icon: 'error',
-            text: error.error['msg'],
-          }); 
-      });
+      if(!this.editar){
+        this.crearSubtarea();
+      }else{
+        this.actualizarSubtarea();
+      }      
     }
+  }
+
+  private crearSubtarea(){
+    this.subTareaService.postSubtarea(this.formulario.value).subscribe(resp => {
+      Swal.fire({          
+        icon: 'success',
+        text: resp['msg'],
+        timer: 1800,
+        showConfirmButton: false
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer){
+          this.router.navigate(['/tarea/'+ this.idTarea]);
+        }
+      }); 
+    }, (error: HttpErrorResponse) => {
+        Swal.fire({          
+          icon: 'error',
+          text: error.error['msg'],
+        }); 
+    });    
   }
 
   private getEstados(){
     this.tareaService.getEstados().subscribe(resp => this.estados = resp);
   }
+
+  private actualizarSubtarea(){
+    this.subTareaService.patchSubtarea(this.formulario.value, this.idSubtarea).subscribe(resp => {
+      console.log(resp);
+      Swal.fire({          
+        icon: 'success',
+        text: resp['msg'],
+        timer: 1800,
+        showConfirmButton: false
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer){
+          this.router.navigate(['/tarea/'+ this.idTarea]);
+        }
+      }); 
+    }, (error: HttpErrorResponse) => {
+        Swal.fire({          
+          icon: 'error',
+          text: error.error['msg'],
+        });
+    });
+  }
+
 
 }

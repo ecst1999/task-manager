@@ -41,8 +41,8 @@
                           {{subTarea.descripcion}} 
                         </div>
                         <div class="ms-auto p-2">
-                          <button class="btn btn-danger"  (click)="eliminarSubtarea(subTarea.uid);"><i class="fas fa-trash"></i></button>
-                          <button class="btn btn-info"><i class="fas fa-pencil"></i></button>
+                          <button class="btn btn-danger"  (click)="eliminarSubtarea(subTarea.uid);"><i class="fas fa-trash"></i></button>                          
+                          <a class="btn btn-info" href="subtarea/edit-form/{{subTarea.uid}}"><i class="fas fa-pencil"></i></a>
                         </div>
                       </div>
                     </div>

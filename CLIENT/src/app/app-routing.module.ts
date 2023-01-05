@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'tarea-form', component: TareasFormComponent, canActivate: [AuthGuard] },
   { path: 'tarea-form/:idTarea', component: TareasFormComponent, canActivate: [AuthGuard] },
   { path: 'subtarea/form/:idTarea', component: SubtareaFormComponent, canActivate: [AuthGuard]},
+  { path: 'subtarea/edit-form/:idSubtarea', component: SubtareaFormComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

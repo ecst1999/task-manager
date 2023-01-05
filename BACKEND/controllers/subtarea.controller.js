@@ -36,7 +36,7 @@ const getSubtarea = async (req, res) => {
         estado: true
     }
 
-    const subtarea = await Subtarea.find(query);
+    const subtarea = await Subtarea.findOne(query).populate('estadoSubtarea', 'descripcion');    
 
     res.json(subtarea);
 }

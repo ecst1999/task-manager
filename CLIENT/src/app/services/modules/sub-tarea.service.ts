@@ -30,8 +30,20 @@ export class SubTareaService {
     return this.http.get(`${this.pathURL}/tarea/${idTarea}`, this.httpOptions).pipe(map((resp: SubTarea[]) => resp));
   }
 
+  getSubtarea(idSubtarea: String): Observable<SubTarea>{
+    return this.http.get(`${this.pathURL}/${idSubtarea}`, this.httpOptions).pipe(
+      map((resp: SubTarea) => resp)
+    );
+  }
+
   postSubtarea(subTarea: any): Observable<SubTarea> {
     return this.http.post(this.pathURL, subTarea, this.httpOptions).pipe(
+      map((resp: SubTarea) => resp)
+    );
+  }
+
+  patchSubtarea(subTarea: any, idSubtarea: String): Observable<SubTarea> {
+    return this.http.patch(`${this.pathURL}/${idSubtarea}`, subTarea, this.httpOptions).pipe(
       map((resp: SubTarea) => resp)
     );
   }
